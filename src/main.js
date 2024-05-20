@@ -7,6 +7,8 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+
+
 let lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     sourceAttr: 'href',
@@ -24,7 +26,7 @@ const loaderEl = document.querySelector('.loader')
 
 searchForm.addEventListener('submit', onSearch);
 
-function onSearch(event) {
+async function onSearch(event) {
     event.preventDefault();
     const form = event.currentTarget;
     const searchQuery = form.elements.searchKeyword.value.trim();
@@ -41,25 +43,33 @@ function onSearch(event) {
 
         return;
     }
-galleryEl.innerHTML = '';
+    galleryEl.innerHTML = '';
     loaderEl.classList.remove('is-hidden');
+ 
     
-
-    searchPhoto(searchQuery).then(imagesData => {
-        if (imagesData.total === 0) {
+    try {
+        const { data } = await searchPhoto(searchQuery)
+        // console.log(data);
+        if (data.total === 0) {
             iziToast.error({
-              message: 'Sorry, there are no images matching your search query. Please try again!',
-              position: 'topRight',
-              timeout: 2000,
-              color: 'red',
+                message: 'Sorry, there are no images matching your search query. Please try again!',
+                position: 'topRight',
+                timeout: 2000,
+                color: 'red',
             });
+            return;
         }
 
-        galleryEl.innerHTML = createMarkup(imagesData.hits);
+        galleryEl.innerHTML = createMarkup(data.hits);
         lightbox.refresh();
-    }).catch(error => console.log(error)).finally(() => {
-        event.target.reset();
-        loaderEl.classList.add('is-hidden');
-    });
+    
+    } catch (error) {
+        console.log(error);
+    }
+
+
+    event.target.reset();
+    loaderEl.classList.add('is-hidden');
+
 }
 
