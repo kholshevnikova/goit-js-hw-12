@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery project</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+ <form class="search-form js-search-form" name="searchImageForm">
+    <div class="form-container">
+      <input class="form-control js-search-input" type="text" name="searchKeyword" required
+        placeholder="Search images..." />
+      <button class="btn form-search-btn" type="submit">
+        Search
+      </button>
+    </div>
+  </form>
+  <span class="loader is-hidden"></span>
+  <section class="gallery-section">
+    <ul class="gallery js-list"></ul>
+    
+  </section>
+<script type="module" src="./main.js"></script>
+  </body>
+</html>
