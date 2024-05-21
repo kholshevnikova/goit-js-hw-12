@@ -82,7 +82,7 @@ async function onSearch(event) {
         if (totalPages > 1) {
          loadBtn.classList.remove('is-hidden');   
         }
-        
+        loadBtn.addEventListener('click', onLoadMorePressed);
         
     
     } catch (error) {
