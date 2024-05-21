@@ -46,6 +46,12 @@ border: none;
   background-color: #6C8CFF;
 }
 
+.load-more {
+width: 125px;
+display: block;
+margin: 32px auto;
+}
+
 .form-control {
   border-radius: 4px;
     width: 272px;
@@ -66,10 +72,11 @@ border: none;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 
-  position: fixed;
+  margin: 32px auto;
+  /* position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 
 @keyframes rotation {
